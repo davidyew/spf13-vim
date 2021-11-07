@@ -21,7 +21,7 @@ app_name='spf13-vim'
 [ -z "$REPO_BRANCH" ] && REPO_BRANCH='3.0'
 debug_mode='0'
 fork_maintainer='0'
-[ -z "$VUNDLE_URI" ] && VUNDLE_URI="https://github.com/gmarik/vundle.git"
+[ -z "$VIMPLUG_URI" ] && VIMPLUG_URI="https://github.com/junegunn/vim-plug"
 
 ############################  BASIC SETUP TOOLS
 msg() {
@@ -157,7 +157,7 @@ setup_fork_mode() {
     fi
 }
 
-setup_vundle() {
+setup_vimplug() {
     local system_shell="$SHELL"
     export SHELL='/bin/sh'
 
@@ -170,7 +170,7 @@ setup_vundle() {
 
     export SHELL="$system_shell"
 
-    success "Now updating/installing plugins using Vundle"
+    success "Now updating/installing plugins using Vim Plug"
     debug
 }
 
@@ -195,12 +195,12 @@ setup_fork_mode "$fork_maintainer" \
                 "$APP_PATH" \
                 "$HOME"
 
-sync_repo       "$HOME/.vim/bundle/vundle" \
-                "$VUNDLE_URI" \
+sync_repo       "$HOME/.vim/autoload/vimplug" \
+                "$VIMPLUG_URI" \
                 "master" \
-                "vundle"
+                "vimplug"
 
-setup_vundle    "$APP_PATH/.vimrc.bundles.default"
+setup_vimplug    "$APP_PATH/.vimrc.bundles.default"
 
 msg             "\nThanks for installing $app_name."
 msg             "© `date +%Y` http://vim.spf13.com/"
