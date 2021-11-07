@@ -16,12 +16,12 @@
 
 ############################  SETUP PARAMETERS
 app_name='spf13-vim'
-[ -z "$APP_PATH" ] && APP_PATH="$HOME/.spf13-vim-3"
-[ -z "$REPO_URI" ] && REPO_URI='https://github.com/spf13/spf13-vim.git'
-[ -z "$REPO_BRANCH" ] && REPO_BRANCH='3.0'
+[ -z "$APP_PATH" ] && APP_PATH="$HOME/.spf13-vim-2021"
+[ -z "$REPO_URI" ] && REPO_URI='https://github.com/davidyew/spf13-vim.git'
+[ -z "$REPO_BRANCH" ] && REPO_BRANCH='main'
 debug_mode='0'
 fork_maintainer='0'
-[ -z "$VUNDLE_URI" ] && VUNDLE_URI="https://github.com/gmarik/vundle.git"
+[ -z "$VIMPLUG_URI" ] && VIMPLUG_URI="https://github.com/junegunn/vim-plug"
 
 ############################  BASIC SETUP TOOLS
 msg() {
@@ -150,14 +150,23 @@ setup_fork_mode() {
         lnif "$source_path/.vimrc.fork"         "$target_path/.vimrc.fork"
         lnif "$source_path/.vimrc.bundles.fork" "$target_path/.vimrc.bundles.fork"
         lnif "$source_path/.vimrc.before.fork"  "$target_path/.vimrc.before.fork"
+        lnif "$source_path/.vimrc.general.config.vim" "$target_path/.vimrc.general.config.vim"
+        lnif "$source_path/.vimrc.ui.config.vim" "$target_path/.vimrc.ui.config.vim"
+        lnif "$source_path/.vimrc.statusline.config.vim" "$target_path/.vimrc.statusline.config.vim"
+        lnif "$source_path/.vimrc.formatting.config.vim" "$target_path/.vimrc.formatting.config.vim"
+        lnif "$source_path/.vimrc.keymapping.config.vim" "$target_path/.vimrc.keymapping.config.vim"
+        lnif "$source_path/.vimrc.gui.config.vim" "$target_path/.vimrc.gui.config.vim"
+        lnif "$source_path/.vimrc.functions.vim" "$target_path/.vimrc.functions.vim"
+        lnif "$source_path/.vimrc.plugins.config.vim" "$target_path/.vimrc.plugins.config.vim"
 
+        lnif "$source_path/operating_systems.function.vim" "$HOME/.vim/autoload/operating_systems.function.vim"
         ret="$?"
         success "Created fork maintainer files."
         debug
     fi
 }
 
-setup_vundle() {
+setup_vimplug() {
     local system_shell="$SHELL"
     export SHELL='/bin/sh'
 
@@ -170,7 +179,7 @@ setup_vundle() {
 
     export SHELL="$system_shell"
 
-    success "Now updating/installing plugins using Vundle"
+    success "Now updating/installing plugins using Vim Plug"
     debug
 }
 
@@ -195,12 +204,12 @@ setup_fork_mode "$fork_maintainer" \
                 "$APP_PATH" \
                 "$HOME"
 
-sync_repo       "$HOME/.vim/bundle/vundle" \
-                "$VUNDLE_URI" \
+sync_repo       "$HOME/.vim/autoload/vimplug" \
+                "$VIMPLUG_URI" \
                 "master" \
-                "vundle"
+                "vimplug"
 
-setup_vundle    "$APP_PATH/.vimrc.bundles.default"
+setup_vimplug    "$APP_PATH/.vimrc.bundles.default"
 
 msg             "\nThanks for installing $app_name."
 msg             "© `date +%Y` http://vim.spf13.com/"
