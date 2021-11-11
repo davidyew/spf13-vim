@@ -63,13 +63,13 @@ vim9script
     # Strip whitespace {
     def! g:StripTrailingWhitespace()
         # Preparation: save last search, and cursor position.
-        var _s=@/
+        var _s = @/
         var l = line(".")
         var c = col(".")
         # do the business:
-        %s/\s\+$//e
+        :%s/\s\+$//e
         # clean up: restore previous search history, and cursor position
-        var @/=_s
+        @/ = _s
         cursor(l, c)
     enddef
     # }
