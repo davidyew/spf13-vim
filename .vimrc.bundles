@@ -25,6 +25,7 @@
 " Initialize Vim-Plug
 source ~/.vim/autoload/vim-plug/plug.vim
 
+
 call plug#begin('~/.vim/bundle')
 " Bundles {
 
@@ -59,7 +60,7 @@ call plug#begin('~/.vim/bundle')
 
     " General {
         if count(g:spf13_bundle_groups, 'general')
-            Plug 'scrooloose/nerdtree'
+            " Plug 'scrooloose/nerdtree'
             Plug 'spf13/vim-colors'
             Plug 'tpope/vim-surround'
             Plug 'tpope/vim-repeat'
@@ -73,7 +74,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'itchyny/lightline.vim'
             Plug 'bling/vim-bufferline'
             Plug 'easymotion/vim-easymotion'
-            Plug 'jistr/vim-nerdtree-tabs'
+            " Plug 'jistr/vim-nerdtree-tabs'
             Plug 'flazz/vim-colorschemes'
             Plug 'mbbill/undotree'
             Plug 'nathanaelkane/vim-indent-guides'
@@ -111,7 +112,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'godlygeek/tabular'
             Plug 'luochen1990/rainbow'
             if executable('ctags')
-                Plug 'majutsushi/tagbar'
+                Plug 'preservim/tagbar'
             endif
         endif
     " }

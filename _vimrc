@@ -54,14 +54,15 @@ set nocompatible        # Must be first line
           if has("multi_byte")
             # Windows cmd.exe still uses cp850. If Windows ever moved to
             # Powershell as the primary terminal, this would be utf-8
-            set termencoding=cp850
+            set termencoding=utf-8
             # Set Vim use utf-8 internally, because many scripts require this
             setglobal fileencoding=utf-8
             # Windows has traditionally used cp1252, so it's probably wise to
             # fallback into cp1252 instead of eg. iso-8859-15.
             # Newer Windows files might contain utf-8 or utf-16 LE so we might
             # want to try them first.
-            set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
+            set fileencodings=utf-8,ucs-bom,utf-16le,cp1252,iso-8859-15,gb18030,gbk2312,cp936
+            set encoding=utf-8
           endif
         endif
     # }

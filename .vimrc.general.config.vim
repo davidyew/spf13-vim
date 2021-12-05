@@ -61,7 +61,7 @@ vim9script
     # To disable this, add the following to your .vimrc.before.local file:
     #   g:spf13_no_restore_cursor = 1
     if !exists('g:spf13_no_restore_cursor')
-        def! g:ResCur():number
+        def! g:ResCur(): number
             if line("'\"") <= line("$")
                 silent! normal! g`"
                 return 1

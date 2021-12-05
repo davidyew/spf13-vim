@@ -41,7 +41,7 @@ vim9script
         if count(g:spf13_bundle_groups, 'writing')
             if exists('*textobj')
                 augroup textobj_quote
-                    autocmd!
+                    azutocmd!
                     autocmd FileType markdown call textobj#quote#init()
                     autocmd FileType textile call textobj#quote#init()
                     autocmd FileType text call textobj#quote#init({'educate': 0})
@@ -58,9 +58,6 @@ vim9script
     # }
 
     # Misc {
-        if isdirectory(expand("~/.vim/bundle/nerdtree"))
-            g:NERDShutUp = 1
-        endif
         if isdirectory(expand("~/.vim/bundle/matchit.zip"))
             b:match_ignorecase = 1
         endif
@@ -102,6 +99,8 @@ vim9script
             var NERDTreeShowHidden = 1
             var NERDTreeKeepTreeInNewTab = 1
             g:nerdtree_tabs_open_on_gui_startup = 0
+            g:nerdtree_tabs_synchronize_view = 0
+            g:NERDShutUp = 1
         endif
     # }
 
@@ -163,10 +162,13 @@ vim9script
                  'dir':  '\.git$\|\.hg$\|\.svn$',
                  'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
             var s:ctrlp_fallback = ''
-            if executable('ag')
-                s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
+            if executable('fd')
+                g:ctrlp_user_command = 'fd -c never "" "%s"'
+                g:ctrlp_use_caching = 0
             elseif executable('rg')
                 s:ctrlp_fallback = 'rg %s --nocolor -l -g ""'
+            elseif executable('ag')
+                s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
             elseif executable('ack-grep')
                 s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
             elseif executable('ack')
@@ -201,6 +203,7 @@ vim9script
     # TagBar {
         if isdirectory(expand("~/.vim/bundle/tagbar/"))
             nnoremap <silent> <leader>tt :TagbarToggle<CR>
+            g:tagbar_ctags_bin = 'ctags.exe'
         endif
     #}
 
@@ -459,5 +462,69 @@ vim9script
             # TODO: FIX inoremap <silent><expr> <Right> : pumvisible() ? <C-n> : s:check_back_space() ? <Right> : coc#refresh()
             inoremap <expr><S-Right> pumvisible() ? "\<C-p>" : "\<C-h>"
         endif
+    # }
+
+    # Vimwiki {
+        if isdirectory(expand("~/.vim/bundle/vimwiki"))
+          # g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_tags': 1, 'path_html': '~/vimwiki_html'}]
+          # g:vimwiki_folding = 'syntax'
+          g:tagbar_type_vimwiki = {
+            'ctagstype': 'vimwiki',
+            'kinds': ['h:header'],
+            'sro': '&&&',
+            'kind2scope': {'h': 'header'},
+            'sort': 0,
+            'ctagsbin': '~/.vim/lib/vwtags.py',
+            'ctagsargs': 'default'
+          }
+        endif
+    # }
+
+    # ack.vim {
+        if isdirectory(expand("~/.vim/bundle/ack.vim"))
+            if executable("rg")
+                g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
+            endif
+            # Auto close the Quickfix list after pressing '<enter>' on a list item
+            g:ack_autoclose = 1
+
+            # Any empty ack search will search for the work the cursor is on
+            g:ack_use_cword_for_empty_search = 1
+
+            # Don't jump to first match
+            cnoreabbrev Ack Ack!
+        endif
+    # }
+
+    # Load netrw as file explorer
+    # more info help netrw
+    # https://shapeshed.com/vim-netrw/
+    # netrw {
+        g:netrw_banner = 0
+        g:netrw_liststyle = 3
+        g:netrw_browse_split = 4
+        g:netrw_altv = 1
+        g:netrw_winsize = 20
+        g:NetrwIsOpen = 0
+        def g:ToggleNetrw()
+            if g:NetrwIsOpen
+                var i = bufnr("$")
+                while (i >= 1)
+                    if (getbufvar(i, "&filetype") == "netrw")
+                        silent exe "bwipeout " .. i 
+                    endif
+                    i -= 1
+                endwhile
+                g:NetrwIsOpen = 0
+            else
+                g:NetrwIsOpen = 1
+                silent Lexplore
+            endif
+        enddef
+        noremap <silent> <C-e> :call g:ToggleNetrw()<CR>
+    # }
+
+    # skim {
+        command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
     # }
 # }
