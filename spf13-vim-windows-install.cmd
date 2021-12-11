@@ -19,7 +19,7 @@ REM    limitations under the License.
 
 @set APP_PATH=%HOME%\.spf13-vim-2021
 IF NOT EXIST "%APP_PATH%" (
-    call git clone -b feature/2021 https://github.com/davidyew/spf13-vim.git "%APP_PATH%"
+    call git clone -b main https://github.com/davidyew/spf13-vim.git "%APP_PATH%"
 ) ELSE (
     @set ORIGINAL_DIR=%CD%
     echo updating spf13-vim
