@@ -161,23 +161,23 @@ vim9script
             g:ctrlp_custom_ignore = {
                  'dir':  '\.git$\|\.hg$\|\.svn$',
                  'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
-            var s:ctrlp_fallback = ''
+            g:ctrlp_fallback = ''
             if executable('fd')
                 g:ctrlp_user_command = 'fd -c never "" "%s"'
                 g:ctrlp_use_caching = 0
             elseif executable('rg')
-                s:ctrlp_fallback = 'rg %s --nocolor -l -g ""'
+                g:ctrlp_fallback = 'rg %s --nocolor -l -g ""'
             elseif executable('ag')
-                s:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
+                g:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
             elseif executable('ack-grep')
-                s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
+                g:ctrlp_fallback = 'ack-grep %s --nocolor -f'
             elseif executable('ack')
-                s:ctrlp_fallback = 'ack %s --nocolor -f'
+                g:ctrlp_fallback = 'ack %s --nocolor -f'
             # On Windows use "dir" as fallback command.
             elseif WINDOWS()
-                s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
+                g:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
             else
-                s:ctrlp_fallback = 'find %s -type f'
+                g:ctrlp_fallback = 'find %s -type f'
             endif
             if exists("g:ctrlp_user_command")
                 unlet g:ctrlp_user_command
@@ -187,7 +187,7 @@ vim9script
                     1: ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others'],
                     2: ['.hg', 'hg --cwd %s locate -I .'],
                 },
-                'fallback': s:ctrlp_fallback
+                'fallback': g:ctrlp_fallback
             }
 
             if isdirectory(expand("~/.vim/bundle/ctrlp-funky/"))
@@ -216,15 +216,15 @@ vim9script
     # Fugitive {
         if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
             nnoremap <silent> <leader>gs :Gstatus<CR>
-            nnoremap <silent> <leader>gd :Gdiff<CR>
+            nnoremap <silent> <leader>gd :Gvdiffsplit %<CR>
             nnoremap <silent> <leader>gc :Gcommit<CR>
-            nnoremap <silent> <leader>gb :Gblame<CR>
-            nnoremap <silent> <leader>gl :Glog<CR>
-            nnoremap <silent> <leader>gp :Git push<CR>
-            nnoremap <silent> <leader>gr :Gread<CR>
-            nnoremap <silent> <leader>gw :Gwrite<CR>
-            nnoremap <silent> <leader>ge :Gedit<CR>
-            # Mnemonic _i_nteractive
+            nnoremap <silent> <leader>gb :Git_blame %<CR>
+            nnoremap <silent> <leader>gl :Gclog %<CR>
+            nnoremap <silent> <leader>gp :Git push %<CR>
+            nnoremap <silent> <leader>gr :Gread %<CR>
+            nnoremap <silent> <leader>gw :Gwrite %<CR>
+            nnoremap <silent> <leader>ge :Gedit %<CR>
+            # Mnemonic _interactive
             nnoremap <silent> <leader>gi :Git add -p %<CR>
             nnoremap <silent> <leader>gg :SignifyToggle<CR>
         endif
@@ -332,7 +332,7 @@ vim9script
 
     # Coc.nvim {
         if isdirectory(expand("~/.vim/bundle/coc.nvim/"))
-            def s:check_back_space(): bool
+            def g:Check_back_space(): bool
               var col = col('.') - 1
               return !col || getline('.')[col - 1]  =~# '\s'
             enddef
@@ -361,9 +361,9 @@ vim9script
             nmap <silent> gr <Plug>(coc-references)
 
             # Use K to show documentation in preview window.
-            nnoremap <silent> K :call <SID>show_documentation()<CR>
+            nnoremap <silent> K :call <SID>g:Show_documentation()<CR>
 
-            def s:show_documentation()
+            def g:Show_documentation()
               if (index(['vim','help'], &filetype) >= 0)
                 execute 'h '.expand('<cword>')
               elseif (coc#rpc#ready())
@@ -459,7 +459,7 @@ vim9script
             # Resume latest coc list.
             nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
             # use right arrow to trigger completion
-            # TODO: FIX inoremap <silent><expr> <Right> : pumvisible() ? <C-n> : s:check_back_space() ? <Right> : coc#refresh()
+            # TODO: FIX inoremap <silent><expr> <Right> : pumvisible() ? <C-n> : g:check_back_space() ? <Right> : coc#refresh()
             inoremap <expr><S-Right> pumvisible() ? "\<C-p>" : "\<C-h>"
         endif
     # }
@@ -483,7 +483,8 @@ vim9script
     # ack.vim {
         if isdirectory(expand("~/.vim/bundle/ack.vim"))
             if executable("rg")
-                g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
+                # g:ackprg = 'rg --vimgrep --type-not msg --type-not mp4 --type-not sql --smart-case'
+                g:ackprg = 'rg'
             endif
             # Auto close the Quickfix list after pressing '<enter>' on a list item
             g:ack_autoclose = 1

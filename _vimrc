@@ -38,7 +38,7 @@ set nocompatible        # Must be first line
     source ~/.vim/autoload/operating_systems.function.vim
 
     # Basics {
-        if !WINDOWS()
+        if !g:WINDOWS()
             set shell=/bin/sh
         endif
     # }
@@ -46,7 +46,7 @@ set nocompatible        # Must be first line
     # Windows Compatible {
         # On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         # across (heterogeneous) systems easier.
-        if WINDOWS()
+         if g:WINDOWS()
           set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 
           # Be nice and check for multi_byte even if the config requires

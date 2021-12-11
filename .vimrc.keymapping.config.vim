@@ -22,14 +22,14 @@ vim9script
     #   g:spf13_edit_config_mapping ='<leader>ec'
     #   g:spf13_apply_config_mapping = <leader>sc'
     if !exists('g:spf13_edit_config_mapping')
-        var s:spf13_edit_config_mapping = '<leader>ev'
+        g:spf13_edit_config_mapping = '<leader>ev'
     else
-        var s:spf13_edit_config_mapping = g:spf13_edit_config_mapping
+        g:spf13_edit_config_mapping = g:spf13_edit_config_mapping
     endif
     if !exists('g:spf13_apply_config_mapping')
-        var s:spf13_apply_config_mapping = '<leader>sv'
+        g:spf13_apply_config_mapping = '<leader>sv'
     else
-        var s:spf13_apply_config_mapping = g:spf13_apply_config_mapping
+        g:spf13_apply_config_mapping = g:spf13_apply_config_mapping
     endif
 
     # Easier moving in tabs and windows
@@ -158,7 +158,9 @@ vim9script
     vnoremap . :normal .<CR>
 
     # For when you forget to sudo.. Really Write the file.
-    cmap w!! w !sudo tee % >/dev/null
+    if g:LINUX()
+        cmap w!! w !sudo tee % >/dev/null
+    endif
 
     # Some helpers to edit mode
     # http://vimcasts.org/e/14
@@ -185,5 +187,10 @@ vim9script
     # FIXME: Revert this f70be548
     # fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
     map <silent> <F11> system("wmctrl -ir # . v:windowid . # -b toggle,fullscreen")<CR>
+
+    # Vimwiki start {
+    nmap <Leader>wa :call VimwikiFindAllIncompleteTasks()<CR>
+    nmap <Leader>wx :call VimwikiFindIncompleteTasks()<CR>
+    # Vimwiki end }
 
 # }

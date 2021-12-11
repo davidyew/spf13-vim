@@ -43,7 +43,7 @@ vim9script
             endif
         endfor
     enddef
-    InitializeDirectories()
+    g:InitializeDirectories()
     # }
 
     # Initialize NERDTree as needed {
@@ -137,6 +137,7 @@ vim9script
         execute bufwinnr(".vimrc.local") . "wincmd w"
     enddef
 
-    execute "noremap # . s:spf13_edit_config_mapping # :call <SID>EditSpf13Config()<CR>"
-    execute "noremap # . s:spf13_apply_config_mapping . # :source ~/.vimrc<CR>"
+    # Disable
+    # execute "noremap # . s:spf13_edit_config_mapping # :call <SID>EditSpf13Config()<CR>"
+    # execute "noremap # . s:spf13_apply_config_mapping . # :source ~/.vimrc<CR>"
 # }
