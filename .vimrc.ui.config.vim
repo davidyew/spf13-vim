@@ -62,6 +62,8 @@ vim9script
     set list
     # TODO: fix listchars
     # set listchars=tab:›\ ,trail:•,extends:#,nbsp:. # Highlight problematic whitespace
-    set listchars=tab:>-,trail:.,extends:#,nbsp:.
+    # set listchars=tab:>-,trail:.,extends:#,nbsp:.
 
+    # set listchars=tab:â€º\ ,trail:â€¢,extends:#,nbsp:. # Highlight problematic whitespace
+    set listchars=tab:>-,trail:•,extends:#,nbsp:•
 # }
