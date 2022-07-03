@@ -1,4 +1,7 @@
 vim9script
+
+import expand(g:config_path .. "/operating_systems.function.vim") as OS
+
 # Key (re)Mappings {
 
     # The default leader is '\', but many people prefer ',' as it's in a standard
@@ -158,7 +161,7 @@ vim9script
     vnoremap . :normal .<CR>
 
     # For when you forget to sudo.. Really Write the file.
-    if g:LINUX()
+    if OS.Is_LINUX()
         cmap w!! w !sudo tee % >/dev/null
     endif
 

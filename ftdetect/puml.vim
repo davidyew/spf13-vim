@@ -1,7 +1,7 @@
 vim9script
-augroup puml
-    autocmd!
-    au BufNewFile,BufRead *.puml set filetype=puml
+#augroup puml
+#    autocmd!
+    au BufNewFile,BufRead *.puml setlocal filetype=puml
     # au BufWritePost *.puml silent! :term ++hidden ++norestore c:/Apps/plantuml.bat %:p
 
     # Pre-requisite
@@ -19,4 +19,4 @@ augroup puml
     else
         autocmd BufWrite *.puml :silent execute '!java -jar ' .. $PLANTUML .. '\\plantuml.jar % -Tsvg &'
     endif
-augroup END
+# augroup END
