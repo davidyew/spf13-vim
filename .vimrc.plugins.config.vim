@@ -1,4 +1,5 @@
 vim9script
+import "./operating_systems.function.vim" as OS
 # Plugins {
 
     # GoLang {
@@ -174,7 +175,7 @@ vim9script
             elseif executable('ack')
                 g:ctrlp_fallback = 'ack %s --nocolor -f'
             # On Windows use "dir" as fallback command.
-            elseif WINDOWS()
+            elseif OS.Is_WINDOWS()
                 g:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
             else
                 g:ctrlp_fallback = 'find %s -type f'
