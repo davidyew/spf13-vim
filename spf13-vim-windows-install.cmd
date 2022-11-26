@@ -31,8 +31,9 @@ IF NOT EXIST "%APP_PATH%" (
 
 copy /y "%APP_PATH%\.vimrc" "%HOME%\.vimrc"
 
+REM create directory junction to .vim
+REM See https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mklink
 call mklink /J "%HOME%\.vim" "%APP_PATH%\.vim"
-copy /y "%APP_PATH%\operating_systems.function.vim" "%HOME%\.vim\autoload\operating_systems.function.vim"
 
 IF NOT EXIST "%APP_PATH%\.vim\bundle" (
     call mkdir "%APP_PATH%\.vim\bundle"
