@@ -12,5 +12,7 @@ Plug 'Konfekt/FastFold'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Color Scheme
 Plug 'morhetz/gruvbox'
+" Open API
+Plug 'hsanson/vim-openapi'
 " CSV
 " Plug 'chrisbra/csv.vim'

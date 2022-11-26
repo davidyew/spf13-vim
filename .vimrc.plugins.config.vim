@@ -484,7 +484,7 @@ vim9script
         if isdirectory(expand("~/.vim/bundle/ack.vim"))
             if executable("rg")
                 # g:ackprg = 'rg --vimgrep --type-not msg --type-not mp4 --type-not sql --smart-case'
-                g:ackprg = 'rg'
+                g:ackprg = 'rg --vimgrep'
             endif
             # Auto close the Quickfix list after pressing '<enter>' on a list item
             g:ack_autoclose = 1

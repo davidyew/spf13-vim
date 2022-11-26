@@ -30,8 +30,6 @@ IF NOT EXIST "%APP_PATH%" (
 )
 
 copy /y "%APP_PATH%\.vimrc" "%HOME%\.vimrc"
-copy /y "%APP_PATH%\.vimrc" "%HOME%\_vimrc"
-copy /y "%APP_PATH%\.vimrc.fork" "%HOME%\.vimrc.fork"
 
 call mklink /J "%HOME%\.vim" "%APP_PATH%\.vim"
 copy /y "%APP_PATH%\operating_systems.function.vim" "%HOME%\.vim\autoload\operating_systems.function.vim"

@@ -1,7 +1,9 @@
 vim9script
 
 import expand(g:config_path .. "/file_utility.vim")
-import expand(g:config_path .. "/function.vim")
+file_utility.CheckAndSource(g:config_path .. "/function.vim")
+file_utility.CheckAndSource(g:config_path .. "/operating_systems.function.vim")
+# import expand(g:config_path .. "/function.vim")
 import expand(g:config_path .. "/operating_systems.function.vim") as OS
 
 # Modeline and Notes {
