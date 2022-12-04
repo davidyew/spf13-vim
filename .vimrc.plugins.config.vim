@@ -1,4 +1,5 @@
 vim9script
+import "./operating_systems.function.vim" as OS
 # Plugins {
 
     # GoLang {
@@ -176,7 +177,7 @@ vim9script
             elseif executable('ack')
                 g:ctrlp_fallback = 'ack %s --nocolor -f'
             # On Windows use "dir" as fallback command.
-            elseif WINDOWS()
+            elseif OS.Is_WINDOWS()
                 g:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
             else
                 g:ctrlp_fallback = 'find %s -type f'
@@ -229,6 +230,8 @@ vim9script
             # Mnemonic _interactive
             nnoremap <silent> <leader>gi :Git add -p %<CR>
             nnoremap <silent> <leader>gg :SignifyToggle<CR>
+            # statusline
+            set statusline^=%{FugitiveStatusline()}
         endif
     #}
 
@@ -443,6 +446,7 @@ vim9script
             # provide custom statusline: lightline.vim, vim-airline.
             set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+
             # Mappings for CoCList
             # Show all diagnostics.
             nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -486,7 +490,7 @@ vim9script
         if isdirectory(expand("~/.vim/bundle/ack.vim"))
             if executable("rg")
                 # g:ackprg = 'rg --vimgrep --type-not msg --type-not mp4 --type-not sql --smart-case'
-                g:ackprg = 'rg'
+                g:ackprg = 'rg --vimgrep'
             endif
             # Auto close the Quickfix list after pressing '<enter>' on a list item
             g:ack_autoclose = 1

@@ -17,7 +17,7 @@ The distribution is completely customisable via different `.local` or `.fork` Vi
 
 ![spf13-vim image][spf13-vim-img]
 
-spf13-vim 2021 uses the [Vim Plug](https://github.com/junegunn/vim-plug) plugin management system to have a well organized vim directory (Similar to mac's app folder). Vim Plug also ensures that the latest versions of your plugins are installed and makes it easy to keep them up to date.
+spf13-vim uses the [Vim Plug](https://github.com/junegunn/vim-plug) plugin management system to have a well organized vim directory (Similar to mac's app folder). Vim Plug also ensures that the latest versions of your plugins are installed and makes it easy to keep them up to date.
 
 Great care has been taken to ensure that each plugin plays nicely with others, and optional configuration has been provided for what we believe is the most efficient use.
 
@@ -44,7 +44,7 @@ If you have a bash-compatible shell you can run the script directly:
     sh <(curl https://bit.ly/spf13-bootstrap -L)
 ```
 
-## Installing on Windows 10
+## Installing on Windows 10 and above
 
 If you already had install nodejs, vim and git, you may follow the instructions under [Installing spf13-vim on Windows](#Installing spf13-vim on Windows)
     C:\Users\{Your Username}> curl https://bit.ly/spf13-win
@@ -68,7 +68,7 @@ After the installation of Vim you must add a new directory to your environment v
 Open Vim and write the following command, it will show the installed directory:
 
     :echo $VIMRUNTIME
-    C:\Program Files (X86)\Vim\vim82
+    C:\Program Files (X86)\Vim\vim{vim_version}
 
 Then you need to add it to your environment variable path. After that try execute `vim` within command prompt (press Win-R, type `cmd`, press Enter) and you’ll see the default vim page.
 
