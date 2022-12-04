@@ -14,3 +14,5 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
 " CSV
 " Plug 'chrisbra/csv.vim'
+
+Plug 'tc50cal/vim-taglist'

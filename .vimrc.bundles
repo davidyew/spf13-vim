@@ -36,14 +36,13 @@ call plug#begin('~/.vim/bundle')
         Plug 'tomtom/tlib_vim'
         if executable('ag') || executable('rg')
             Plug 'mileszs/ack.vim'
-                g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
             if executable('ag')
                 g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
             elseif executable('rg')
                 g:ackprg = 'rg --vimgrep --no-heading'
             endif
         elseif executable('ack-grep')
-                g:ackprg="ack-grep -H --nocolor --nogroup --column"
+                g:ackprg = "ack-grep -H --nocolor --nogroup --column"
             Plug 'mileszs/ack.vim'
         elseif executable('ack')
             Plug 'mileszs/ack.vim'
