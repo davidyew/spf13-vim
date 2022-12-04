@@ -228,6 +228,8 @@ import "./operating_systems.function.vim" as OS
             # Mnemonic _interactive
             nnoremap <silent> <leader>gi :Git add -p %<CR>
             nnoremap <silent> <leader>gg :SignifyToggle<CR>
+            # statusline
+            set statusline^=%{FugitiveStatusline()}
         endif
     #}
 
@@ -441,6 +443,7 @@ import "./operating_systems.function.vim" as OS
             # NOTE: Please see `:h coc-status` for integrations with external plugins that
             # provide custom statusline: lightline.vim, vim-airline.
             set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 
             # Mappings for CoCList
             # Show all diagnostics.

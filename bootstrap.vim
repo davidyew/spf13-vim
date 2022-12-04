@@ -51,7 +51,7 @@ import expand(g:config_path .. "/operating_systems.function.vim") as OS
         # On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         # across (heterogeneous) systems easier.
         if OS.Is_WINDOWS()
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after,
+          set runtimepath=$HOME/.vim,$HOME/.vim/after,$VIM/vimfiles/after,$VIM/vimfiles,$VIMRUNTIME,
 
           # Be nice and check for multi_byte even if the config requires
           # multi_byte support most of the time
