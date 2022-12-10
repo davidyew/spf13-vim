@@ -77,7 +77,7 @@ vim9script
     #   autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#404040 ctermbg=234
 
     # Leave the default font and size in GVim
-    # To set your own font, do it from ~/.vimrc.local
+    # To set your own font, do it from ~/vimrc.local.vim
     #   let g:spf13_no_big_font = 1
 
     # Disable  omni complete
@@ -100,11 +100,12 @@ vim9script
 # }
 
 import expand("./file_utility.vim")
+var LoadVimScript = file_utility.CheckAndSource
 
 # Use fork before if available {
-    file_utility.CheckAndSource(g:config_path .. "/.vimrc.before.fork")
+    LoadVimScript(g:config_path .. "/vimrc.before.fork.vim")
 # }
 
 # Use local before if available {
-    file_utility.CheckAndSource(g:config_path .. "/.vimrc.before.local")
+    LoadVimScript(g:config_path .. "/vimrc.before.local.vim")
 # }

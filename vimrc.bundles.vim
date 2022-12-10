@@ -9,26 +9,26 @@ vim9script
 #        |___/ .__/|_| |_|____/        \_/  |_|_| |_| |_|
 #            |_|
 #
-#   This is the personal .vimrc.bundles file of Steve Francia.
+#   This is the personal vimrc.bundles file of Steve Francia.
 #   While much of it is beneficial for general use, I would
 #   recommend picking out the parts you want and understand.
 #
 #   This file imports the various plugins of spf13. If you
 #   wish to alter which groups are imported, see vimrc.before.
 #   If you wish to add or remove individual bundles, create
-#   ~/.vimrc.bundles.local and `Bundle` or `UnBundle` as needed
+#   ~/vimrc.bundles.local and `Bundle` or `UnBundle` as needed
 #   from there.
 #
 #   You can find me at http://spf13.com
 # }
 
-import expand("./file_utility.vim")
+import expand('./file_utility.vim')
+var LoadVimScript = file_utility.CheckAndSource
 
 # Initialize Vim-Plug
-source ~/.vim/autoload/vim-plug/plug.vim
+execute 'source ' .. g:vim_path .. '/autoload/vim-plug/plug.vim' 
 
-
-call plug#begin('~/.vim/bundle')
+call plug#begin(g:vim_path .. '/bundle')
 # Bundles {
 
     # Deps {
@@ -42,23 +42,23 @@ call plug#begin('~/.vim/bundle')
                 g:ackprg = 'rg --vimgrep --no-heading'
             endif
         elseif executable('ack-grep')
-                g:ackprg = "ack-grep -H --nocolor --nogroup --column"
+                g:ackprg = 'ack-grep -H --nocolor --nogroup --column'
             Plug 'mileszs/ack.vim'
         elseif executable('ack')
             Plug 'mileszs/ack.vim'
         endif
     # }
 
-    # In your .vimrc.before.local file
+    # In your vimrc.before.local file
     # list only the plugin groups you will use
     if !exists('g:spf13_bundle_groups')
         g:spf13_bundle_groups = ['general', 'writing', 'deoplete', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc', 'rust', 'markdown']
     endif
 
     # To override all the included bundles, add the following to your
-    # .vimrc.bundles.local file:
+    # vimrc.bundles.local file:
     #   var g:override_spf13_bundles = 1
-    if !exists("g:override_spf13_bundles")
+    if !exists('g:override_spf13_bundles')
 
     # General {
         if count(g:spf13_bundle_groups, 'general')
@@ -124,8 +124,8 @@ call plug#begin('~/.vim/bundle')
              Plug 'garbas/vim-snipmate'
              Plug 'honza/vim-snippets'
             # Source support_function.vim to support vim-snippets.
-            if filereadable(expand("~/.vim/bundle/vim-snippets/snippets/support_functions.vim"))
-                source ~/.vim/bundle/vim-snippets/snippets/support_functions.vim
+            if filereadable(expand(g:bundle_path .. '/vim-snippets/snippets/support_functions.vim'))
+                source g:bundle_path .. '/vim-snippets/snippets/support_functions.vim'
             endif
         elseif count(g:spf13_bundle_groups, 'youcompleteme')
             # Plug 'SirVer/ultisnips'
@@ -248,11 +248,11 @@ call plug#begin('~/.vim/bundle')
 # }
 
 # Use fork bundles config if available {
-    file_utility.CheckAndSource(g:config_path .. "/.vimrc.bundles.fork")
+    LoadVimScript(g:config_path .. '/vimrc.bundles.fork.vim')
 # }
 
 # Use local bundles config if available {
-    file_utility.CheckAndSource(g:config_path .. "/.vimrc.bundles.local")
+    LoadVimScript(g:config_path .. '/vimrc.bundles.local.vim')
 # }
 
 call plug#end()

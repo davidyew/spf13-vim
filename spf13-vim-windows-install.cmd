@@ -17,7 +17,7 @@ REM    limitations under the License.
 @if not exist "%HOME%" @set HOME=%HOMEDRIVE%%HOMEPATH%
 @if not exist "%HOME%" @set HOME=%USERPROFILE%
 
-@set APP_PATH=%HOME%\.spf13-vim-2021
+@set APP_PATH=%HOME%\.spf13-vim
 IF NOT EXIST "%APP_PATH%" (
     call git clone -b main https://github.com/davidyew/spf13-vim.git "%APP_PATH%"
 ) ELSE (
@@ -29,7 +29,8 @@ IF NOT EXIST "%APP_PATH%" (
     call cd "%APP_PATH%"
 )
 
-copy /y "%APP_PATH%\.vimrc" "%HOME%\.vimrc"
+REM copy /y "%APP_PATH%\.vimrc" "%HOME%\.vimrc"
+copy /y "%APP_PATH%\_vimrc" "%HOME%\_vimrc"
 
 REM create directory junction to .vim
 REM See https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mklink
@@ -48,4 +49,4 @@ IF NOT EXIST "%HOME%/.vim/autoload/vim-plug" (
   call cd %HOME%
 )
 
-call vim -u "%APP_PATH%\.vimrc.bundles" +PlugInstall! +PlugClean +qall
+call vim -u "%APP_PATH%\vimrc.bundles.vim" +PlugInstall! +PlugClean +qall

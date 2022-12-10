@@ -19,7 +19,7 @@ def! g:InitializeDirectories()
 
     # To specify a different directory in which to place the vimbackup,
     # vimviews, vimundo, and vimswap files/directories, add the following to
-    # your .vimrc.before.local file:
+    # your vimrc.before.local.vim file:
     #   g:spf13_consolidated_directory = <full path to desired directory>
     #   eg: g:spf13_consolidated_directory = $HOME . '/.vim/'
     if exists('g:spf13_consolidated_directory')
@@ -103,7 +103,7 @@ command! -complete=file -nargs=+ Shell s:RunShellCommand(<q-args>)
 # TODO: Can remove?
 def! g:IsSpf13Fork()
     var s:is_fork = 0
-    var s:fork_files = ["~/.vimrc.fork", "~/.vimrc.before.fork", "~/.vimrc.bundles.fork"]
+    var s:fork_files = [g:config_path .. '/vimrc.fork.vim', g:config_path .. '/vimrc.before.fork.vim', g:config_path .. '/vimrc.bundles.fork.vim']
     for fork_file in s:fork_files
         if filereadable(expand(fork_file, ":p"))
             var s:is_fork = 1
@@ -121,29 +121,29 @@ enddef
 
 # For edit of Spf13 Config files
 def! g:EditSpf13Config()
-    <SID>ExpandFilenameAndExecute("tabedit", "~/.vimrc")
-    <SID>ExpandFilenameAndExecute("vsplit", "~/.vimrc.before")
-    <SID>ExpandFilenameAndExecute("vsplit", "~/.vimrc.bundles")
+    <SID>ExpandFilenameAndExecute('tabedit', g:config_path .. '/_vimrc')
+    <SID>ExpandFilenameAndExecute('vsplit', g:config_path .. '/vimrc.before.vim')
+    <SID>ExpandFilenameAndExecute('vsplit', g:config_path .. '/vimrc.bundles.vim')
 
-    execute bufwinnr(".vimrc") . "wincmd w"
-    <SID>ExpandFilenameAndExecute("split", "~/.vimrc.local")
+    execute bufwinnr('.vimrc') . 'wincmd w'
+    <SID>ExpandFilenameAndExecute('split', g:config_path .. '/vimrc.local.vim')
     wincmd l
-    <SID>ExpandFilenameAndExecute("split", "~/.vimrc.before.local")
+    <SID>ExpandFilenameAndExecute('split', g:config_path .. '/vimrc.before.local.vim')
     wincmd l
-    <SID>ExpandFilenameAndExecute("split", "~/.vimrc.bundles.local")
+    <SID>ExpandFilenameAndExecute('split', g:config_path .. '/vimrc.bundles.local.vim')
 
     if <SID>IsSpf13Fork()
-        execute bufwinnr(".vimrc") . "wincmd w"
-        <SID>ExpandFilenameAndExecute("split", "~/.vimrc.fork")
+        execute bufwinnr('.vimrc') . 'wincmd w'
+        <SID>ExpandFilenameAndExecute('split', g:config_path .. '/vimrc.fork.vim')
         wincmd l
-        <SID>ExpandFilenameAndExecute("split", "~/.vimrc.before.fork")
+        <SID>ExpandFilenameAndExecute('split', g:config_path .. '/vimrc.before.fork.vim')
         wincmd l
-        <SID>ExpandFilenameAndExecute("split", "~/.vimrc.bundles.fork")
+        <SID>ExpandFilenameAndExecute('split', g:config_path .. '/vimrc.bundles.fork.vim')
     endif
 
-    execute bufwinnr(".vimrc.local") . "wincmd w"
+    execute bufwinnr('vimrc.local.vim') . 'wincmd w'
 enddef
 
 # Disable mappings for edit and load spf13 config
 # execute "noremap # . s:spf13_edit_config_mapping # :call <SID>EditSpf13Config()<CR>"
-# execute "noremap # . s:spf13_apply_config_mapping . # :source ~/.vimrc<CR>"
+# execute "noremap # . s:spf13_apply_config_mapping . # :source ~/_vimrc<CR>"

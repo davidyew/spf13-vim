@@ -1,10 +1,12 @@
 vim9script
 
-import expand(g:config_path .. "/file_utility.vim")
-file_utility.CheckAndSource(g:config_path .. "/function.vim")
-file_utility.CheckAndSource(g:config_path .. "/operating_systems.function.vim")
-# import expand(g:config_path .. "/function.vim")
-import expand(g:config_path .. "/operating_systems.function.vim") as OS
+import expand(g:config_path .. '/file_utility.vim')
+
+var LoadVimScript = file_utility.CheckAndSource
+LoadVimScript(g:config_path .. '/function.vim')
+LoadVimScript(g:config_path .. '/operating_systems.function.vim')
+# import expand(g:config_path .. '/function.vim')
+import expand(g:config_path .. '/operating_systems.function.vim') as OS
 
 # Modeline and Notes {
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
@@ -51,11 +53,11 @@ import expand(g:config_path .. "/operating_systems.function.vim") as OS
         # On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         # across (heterogeneous) systems easier.
         if OS.Is_WINDOWS()
-          set runtimepath=$HOME/.vim,$HOME/.vim/after,$VIM/vimfiles/after,$VIM/vimfiles,$VIMRUNTIME,
+          set runtimepath=$HOME/.vim,$HOME/.vim/after,$VIM/vimfiles,$VIM/vimfiles/after,$VIMRUNTIME,
 
           # Be nice and check for multi_byte even if the config requires
           # multi_byte support most of the time
-          if has("multi_byte")
+          if has('multi_byte')
             # Windows cmd.exe still uses cp850. If Windows ever moved to
             # Powershell as the primary terminal, this would be utf-8
             set termencoding=utf-8
@@ -73,7 +75,7 @@ import expand(g:config_path .. "/operating_systems.function.vim") as OS
 
     # Arrow Key Fix {
         # https://github.com/spf13/spf13-vim/issues/780
-        if &term[ : 4] == "xterm" || &term[ : 5] == 'screen' || &term[ : 3] == 'rxvt'
+        if &term[ : 4] == 'xterm' || &term[ : 5] == 'screen' || &term[ : 3] == 'rxvt'
             inoremap <silent> <C-[>OC <RIGHT>
         endif
     # }
@@ -81,34 +83,34 @@ import expand(g:config_path .. "/operating_systems.function.vim") as OS
 # }
 
 # Use before config if available {
-    file_utility.CheckAndSource(g:config_path .. "/.vimrc.before")
+    LoadVimScript(g:config_path .. '/vimrc.before.vim')
 # }
 
 # Use bundles config {
-     file_utility.CheckAndSource(g:config_path .. "/.vimrc.bundles")
+     LoadVimScript(g:config_path .. '/vimrc.bundles.vim')
 # }
 
 # load config {
-     file_utility.CheckAndSource(g:config_path .. "/.vimrc.general.config.vim")
-     file_utility.CheckAndSource(g:config_path .. "/.vimrc.ui.config.vim")
-     file_utility.CheckAndSource(g:config_path .. "/.vimrc.statusline.config.vim")
-     file_utility.CheckAndSource(g:config_path .. "/.vimrc.formatting.config.vim")
-     file_utility.CheckAndSource(g:config_path .. "/.vimrc.keymapping.config.vim")
-     file_utility.CheckAndSource(g:config_path .. "/.vimrc.gui.config.vim")
-     file_utility.CheckAndSource(g:config_path .. "/.vimrc.plugins.config.vim")
+     LoadVimScript(g:config_path .. '/vimrc.general.config.vim')
+     LoadVimScript(g:config_path .. '/vimrc.ui.config.vim')
+     LoadVimScript(g:config_path .. '/vimrc.statusline.config.vim')
+     LoadVimScript(g:config_path .. '/vimrc.formatting.config.vim')
+     LoadVimScript(g:config_path .. '/vimrc.keymapping.config.vim')
+     LoadVimScript(g:config_path .. '/vimrc.gui.config.vim')
+     LoadVimScript(g:config_path .. '/vimrc.plugins.config.vim')
 # }
 
 # Use fork vimrc if available {
-    file_utility.CheckAndSource(g:config_path .. "/.vimrc.fork")
+    LoadVimScript(g:config_path .. '/vimrc.fork.vim')
 # }
 
 # Use local vimrc if available {
-    file_utility.CheckAndSource(g:config_path .. "/.vimrc.local")
+    LoadVimScript(g:config_path .. '/vimrc.local.vim')
 # }
 
 # Use local gvimrc if available and gui is running {
     if has('gui_running')
-        file_utility.CheckAndSource(g:config_path .. "/.gvimrc.local")
+        LoadVimScript(g:config_path .. '/gvimrc.local.vim')
     endif
 # }
 

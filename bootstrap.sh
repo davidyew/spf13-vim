@@ -16,7 +16,7 @@
 
 ############################  SETUP PARAMETERS
 app_name='spf13-vim'
-[ -z "$APP_PATH" ] && APP_PATH="$HOME/.spf13-vim-2021"
+[ -z "$APP_PATH" ] && APP_PATH="$HOME/.spf13-vim"
 [ -z "$REPO_URI" ] && REPO_URI='https://github.com/davidyew/spf13-vim.git'
 [ -z "$REPO_BRANCH" ] && REPO_BRANCH='main'
 debug_mode='0'
@@ -122,16 +122,12 @@ create_symlinks() {
     local target_path="$2"
 
     lnif "$source_path/.vimrc"         "$target_path/.vimrc"
-    lnif "$source_path/.vimrc.bundles" "$target_path/.vimrc.bundles"
-    lnif "$source_path/.vimrc.before"  "$target_path/.vimrc.before"
     lnif "$source_path/.vim"           "$target_path/.vim"
 
     if program_exists "nvim"; then
         lnif "$source_path/.vim"       "$target_path/.config/nvim"
         lnif "$source_path/.vimrc"     "$target_path/.config/nvim/init.vim"
     fi
-
-    touch  "$target_path/.vimrc.local"
 
     ret="$?"
     success "Setting up vim symlinks."
@@ -143,23 +139,6 @@ setup_fork_mode() {
     local target_path="$3"
 
     if [ "$1" -eq '1' ]; then
-        touch "$target_path/.vimrc.fork"
-        touch "$target_path/.vimrc.bundles.fork"
-        touch "$target_path/.vimrc.before.fork"
-
-        lnif "$source_path/.vimrc.fork"         "$target_path/.vimrc.fork"
-        lnif "$source_path/.vimrc.bundles.fork" "$target_path/.vimrc.bundles.fork"
-        lnif "$source_path/.vimrc.before.fork"  "$target_path/.vimrc.before.fork"
-        lnif "$source_path/.vimrc.general.config.vim" "$target_path/.vimrc.general.config.vim"
-        lnif "$source_path/.vimrc.ui.config.vim" "$target_path/.vimrc.ui.config.vim"
-        lnif "$source_path/.vimrc.statusline.config.vim" "$target_path/.vimrc.statusline.config.vim"
-        lnif "$source_path/.vimrc.formatting.config.vim" "$target_path/.vimrc.formatting.config.vim"
-        lnif "$source_path/.vimrc.keymapping.config.vim" "$target_path/.vimrc.keymapping.config.vim"
-        lnif "$source_path/.vimrc.gui.config.vim" "$target_path/.vimrc.gui.config.vim"
-        lnif "$source_path/.vimrc.functions.vim" "$target_path/.vimrc.functions.vim"
-        lnif "$source_path/.vimrc.plugins.config.vim" "$target_path/.vimrc.plugins.config.vim"
-
-        lnif "$source_path/operating_systems.function.vim" "$HOME/.vim/autoload/operating_systems.function.vim"
         ret="$?"
         success "Created fork maintainer files."
         debug
@@ -209,7 +188,7 @@ sync_repo       "$HOME/.vim/autoload/vimplug" \
                 "master" \
                 "vimplug"
 
-setup_vimplug    "$APP_PATH/.vimrc.bundles.default"
+setup_vimplug    "$APP_PATH/vimrc.bundles.default.vim"
 
 msg             "\nThanks for installing $app_name."
 msg             "© `date +%Y` http://vim.spf13.com/"
