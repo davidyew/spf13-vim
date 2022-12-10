@@ -9,99 +9,75 @@
 
 spf13-vim is a distribution of vim plugins and resources for Vim, Gvim and [MacVim].
 
+Note: This is a fork from the original spf13-vim with changes to maximize new capabilities and contributions from the open source community, especially since Vim 8 has asynchronous capability giving plugin authors the ability to create better and faster plugins to empower end-user with greater efficiency and productivity.
+
 It is a good starting point for anyone intending to use VIM for development running equally well on Windows, Linux, \*nix and Mac.
 
-The distribution is completely customisable using a `~/.vimrc.local`, `~/.vimrc.bundles.local`, and `~/.vimrc.before.local` Vim RC files.
+The distribution is completely customisable via different `.local` or `.fork` Vim RC files. Refer to [Customization](#Customization) for more details
 
 ![spf13-vim image][spf13-vim-img]
 
-Unlike traditional VIM plugin structure, which similar to UNIX throws all files into common directories, making updating or disabling plugins a real mess, spf13-vim 3 uses the [Vundle] plugin management system to have a well organized vim directory (Similar to mac's app folders). Vundle also ensures that the latest versions of your plugins are installed and makes it easy to keep them up to date.
+spf13-vim uses the [Vim Plug](https://github.com/junegunn/vim-plug) plugin management system to have a well organized vim directory (Similar to mac's app folder). Vim Plug also ensures that the latest versions of your plugins are installed and makes it easy to keep them up to date.
 
 Great care has been taken to ensure that each plugin plays nicely with others, and optional configuration has been provided for what we believe is the most efficient use.
 
-Lastly (and perhaps, most importantly) It is completely cross platform. It works well on Windows, Linux and OSX without any modifications or additional configurations. If you are using [MacVim] or Gvim additional features are enabled. So regardless of your environment just clone and run.
+Lastly (and perhaps, most importantly) It is completely cross platform. It works well on Windows 10, Linux and OSX without any modifications or additional configurations. If you are using [MacVim] or Gvim additional features are enabled. So regardless of your environment just clone and run.
 
 # Installation
 ## Requirements
-To make all the plugins work, specifically [neocomplete](https://github.com/Shougo/neocomplete.vim), you need [vim with lua](https://github.com/Shougo/neocomplete.vim#requirements).
+* [Vim](https://www.vim.org) version 8 and above.
+* [Git](https://git-scm.com/)
+* [Node.js](https://nodejs.org/en/), as the base plugins are using [COC.nvim](https://www.vim.org/scripts/script.php?script_id=5779)
 
 ## Linux, \*nix, Mac OSX Installation
 
-The easiest way to install spf13-vim is to use our [automatic installer](https://j.mp/spf13-vim3) by simply copying and pasting the following line into a terminal. This will install spf13-vim and backup your existing vim configuration. If you are upgrading from a prior version (before 3.0) this is also the recommended installation.
-
-*Requires Git 1.7+ and Vim 7.3+*
+The easiest way to install spf13-vim is to use our [automatic installer](https://bit.ly/spf13-bootstrap) by simply copying and pasting the following line into a terminal. This will install spf13-vim and backup your existing vim configuration. If you are upgrading from a prior version (before 3.0) this is also the recommended installation.
 
 ```bash
 
-    curl https://j.mp/spf13-vim3 -L > spf13-vim.sh && sh spf13-vim.sh
+    curl https://bit.ly/spf13-bootstrap -L > spf13-vim.sh && sh spf13-vim.sh
 ```
 
 If you have a bash-compatible shell you can run the script directly:
 ```bash
 
-    sh <(curl https://j.mp/spf13-vim3 -L)
+    sh <(curl https://bit.ly/spf13-bootstrap -L)
 ```
 
-## Installing on Windows
+## Installing on Windows 10 and above
 
-On Windows and \*nix [Git] and [Curl] are required. Also, if you haven't done so already, you'll need to install [Vim].
-The quickest option to install all three dependencies ([Git], [Curl], [Vim] and [spf13-vim]) is via [Chocolatey] NuGet. After installing [Chocolatey], execute the following commands on the _command prompt_:
+If you already had install nodejs, vim and git, you may follow the instructions under [Installing spf13-vim on Windows](#Installing spf13-vim on Windows)
+    C:\Users\{Your Username}> curl https://bit.ly/spf13-win
+    C:\Users\{Your Username}> spf13-vim-windows-install.cmd
 
-    C:\> choco install spf13-vim
-
-_Note: The [spf13-vim package] will install Vim also!_
-
-If you want to install [msysgit], [Curl] and [spf13-vim] individually, follow the directions below.
+If you want to install [Git For Windows] and [spf13-vim] individually, follow the directions below.
 
 ### Installing dependencies
 
-#### Install [Vim]
+#### Install [Node.js](https://nodejs.org/en/)
+
+Please download and install nodejs from [Node.js](https://nodejs.org/en/).
+
+
+#### Install [Vim](https://www.vim.org)
+
+Please download and install Vim from [Vim](https://www.vim.org)
 
 After the installation of Vim you must add a new directory to your environment variables path to make it work with the script installation of spf13.
 
 Open Vim and write the following command, it will show the installed directory:
 
     :echo $VIMRUNTIME
-    C:\Program Files (X86)\Vim\vim74
+    C:\Program Files (X86)\Vim\vim{vim_version}
 
 Then you need to add it to your environment variable path. After that try execute `vim` within command prompt (press Win-R, type `cmd`, press Enter) and you’ll see the default vim page.
 
-#### Install [msysgit]
+#### Install [Git For Windows](https://gitforwindows.org/)
 
 After installation try running `git --version` within _command prompt_ (press Win-R,  type `cmd`, press Enter) to make sure all good:
 
     C:\> git --version
-    git version 1.7.4.msysgit.0
-
-#### Setup [Curl]
-_Instructions blatently copied from vundle readme_
-Installing Curl on Windows is easy as [Curl] is bundled with [msysgit]!
-But before it can be used with [Vundle] it's required make `curl` run in _command prompt_.
-The easiest way is to create `curl.cmd` with [this content](https://gist.github.com/912993)
-
-    @rem Do not use "echo off" to not affect any child calls.
-    @setlocal
-
-    @rem Get the abolute path to the parent directory, which is assumed to be the
-    @rem Git installation root.
-    @for /F "delims=" %%I in ("%~dp0..") do @set git_install_root=%%~fI
-    @set PATH=%git_install_root%\bin;%git_install_root%\mingw\bin;%PATH%
-
-    @if not exist "%HOME%" @set HOME=%HOMEDRIVE%%HOMEPATH%
-    @if not exist "%HOME%" @set HOME=%USERPROFILE%
-
-    @curl.exe %*
-
-
-And copy it to `C:\Program Files\Git\cmd\curl.cmd`, assuming [msysgit] was installed to `c:\Program Files\Git`
-
-to verify all good, run:
-
-    C:\> curl --version
-    curl 7.21.1 (i686-pc-mingw32) libcurl/7.21.1 OpenSSL/0.9.8k zlib/1.2.3
-    Protocols: dict file ftp ftps http https imap imaps ldap ldaps pop3 pop3s rtsp smtp smtps telnet tftp
-    Features: Largefile NTLM SSL SSPI libz
-
+    git version 2.32.0.windows.2
 
 #### Installing spf13-vim on Windows
 
@@ -112,7 +88,7 @@ The simpliest (and safest) way to update is to simply rerun the installer. It wi
 
 ```bash
 
-    curl https://j.mp/spf13-vim3 -L -o - | sh
+    curl https://bit.ly/spf13-bootstrap -L -o - | sh
 
 ```
 
@@ -121,7 +97,7 @@ Alternatively you can manually perform the following steps. If anything has chan
 ```bash
     cd $HOME/to/spf13-vim/
     git pull
-    vim +BundleInstall! +BundleClean +q
+    vim +PlugInstall! +PlugClean! +q
 ```
 
 ### Fork me on GitHub
@@ -335,7 +311,7 @@ YouCompleteMe is another amazing completion engine. It is slightly more involved
 
 To enable YouCompleteMe add `youcompleteme` to your list of groups by overriding it in your `.vimrc.before.local` like so: `let g:spf13_bundle_groups=['general', 'programming', 'misc', 'scala', 'youcompleteme']` This is just an example. Remember to choose the other groups you want here.
 
-Once you have done this you will need to get Vundle to grab the latest code from git. You can do this by calling `:BundleInstall!`. You should see YouCompleteMe in the list.
+Once you have done this you will need to get Vim Plug to grab the latest code from git. You can do this by calling `:BundleInstall!`. You should see YouCompleteMe in the list.
 
 You will now have the code in your bundles directory and can proceed to compile the core. Change to the directory it has been downloaded to. If you have a vanilla install then `cd ~/.spf13-vim-3/.vim/bundle/YouCompleteMe/` should do the trick. You should see a file in this directory called install.sh. There are a few options to consider before running the installer:
 
@@ -520,20 +496,20 @@ Here's some tips if you've never used VIM before:
 * Keyboard [cheat sheet](http://www.viemu.com/vi-vim-cheat-sheet.gif).
 
 [![Analytics](https://ga-beacon.appspot.com/UA-7131036-5/spf13-vim/readme)](https://github.com/igrigorik/ga-beacon)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/spf13/spf13-vim/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/davidyew/spf13-vim/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 
 [Git]:http://git-scm.com
-[Curl]:http://curl.haxx.se
 [Vim]:http://www.vim.org/download.php#pc
-[msysgit]:http://msysgit.github.io
+[Git For Windows]:https://gitforwindows.org/
+[Node.js]:https://nodejs.org/en/
 [Chocolatey]: http://chocolatey.org/
 [spf13-vim package]: https://chocolatey.org/packages/spf13-vim
 [MacVim]:http://code.google.com/p/macvim/
-[spf13-vim]:https://github.com/spf13/spf13-vim
+[spf13-vim]:https://github.com/davidyew/spf13-vim
 [contributors]:https://github.com/spf13/spf13-vim/contributors
 
-[Vundle]:https://github.com/gmarik/vundle
+[Vim Plug]:https://github.com/junegunn/vim-plug
 [PIV]:https://github.com/spf13/PIV
 [NERDCommenter]:https://github.com/scrooloose/nerdcommenter
 [Undotree]:https://github.com/mbbill/undotree
