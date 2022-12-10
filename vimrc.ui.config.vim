@@ -1,16 +1,16 @@
 vim9script
 # Vim UI {
-    if filereadable(expand("~/.vim/bundle/gruvbox/autoload/gruvbox.vim"))
+    if filereadable(expand(g:bundle_path .. '/gruvbox/autoload/gruvbox.vim'))
         set background=dark
         g:gruvbox_contrast_dark = 'hard'
         autocmd vimenter * ++nested colorscheme gruvbox
     endif
 
-    if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+    if !exists('g:override_spf13_bundles') && filereadable(expand(g:bundle_path .. '/vim-colors-solarized/colors/solarized.vim'))
         g:solarized_termcolors = 256
         g:solarized_termtrans = 1
-        g:solarized_contrast = "normal"
-        g:solarized_visibility = "normal"
+        g:solarized_contrast = 'normal'
+        g:solarized_visibility = 'normal'
         color solarized             # Load a colorscheme
     endif
 

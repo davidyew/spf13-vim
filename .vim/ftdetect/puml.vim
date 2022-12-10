@@ -8,7 +8,7 @@ vim9script
     # Please add PLANTUML into environment variable, e.g: PLANTUML=C:\App,
     # where exists $PLANTUML\plantuml.jar
     if empty($PLANTUML)
-        throw 'Missing environment variable:PLANTUML'
+        throw 'Missing environment variable:PLANTUML for PLANTUML folder path'
     endif
 
     g:plantuml_jar_filepath = $PLANTUML .. '\\plantuml.jar'
@@ -27,6 +27,6 @@ vim9script
         # SVG Output
         autocmd BufWrite *.puml :silent execute '!' .. g:run_plantuml_cmd .. ' -Tsvg'
     else
-        autocmd BufWrite *.puml :silent execute '!java -jar ' .. plantuml_jar_filepath ..' % -Tsvg &'
+        autocmd BufWrite *.puml :silent execute '!java -jar ' .. g:plantuml_jar_filepath ..' % -Tsvg &'
     endif
 # augroup END
