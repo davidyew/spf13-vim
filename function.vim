@@ -75,6 +75,20 @@ def! g:StripTrailingWhitespace()
 enddef
 # }
 
+# Strip DOS LF {
+def! g:StripDOSLineFeed()
+    # Preparation: save last search, and cursor position.
+    var _s = @/
+    var l = line(".")
+    var c = col(".")
+    # do the business:
+    :%s///e
+    # clean up: restore previous search history, and cursor position
+    @/ = _s
+    cursor(l, c)
+enddef
+# }
+
 # Shell command {
 def! g:RunShellCommand(cmdline: string)
     botright new
