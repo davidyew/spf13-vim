@@ -53,6 +53,12 @@ import expand(g:config_path .. '/operating_systems.function.vim') as OS
         # On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
         # across (heterogeneous) systems easier.
         if OS.Is_WINDOWS()
+	  # Powershell
+          if executable('cmd.exe')
+              set shell=cmd
+          elseif executable('pwsh.exe')
+              set shell='pwsh.exe'
+          endif
           set runtimepath=$HOME/.vim,$HOME/.vim/after,$VIM/vimfiles,$VIM/vimfiles/after,$VIMRUNTIME,
 
           # Be nice and check for multi_byte even if the config requires

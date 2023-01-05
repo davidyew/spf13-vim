@@ -14,10 +14,12 @@ REM    See the License for the specific language governing permissions and
 REM    limitations under the License.
 
 
-@if not exist "%HOME%" @set HOME=%HOMEDRIVE%%HOMEPATH%
-@if not exist "%HOME%" @set HOME=%USERPROFILE%
+REM @if not exist "%HOME%" @set HOME=%HOMEDRIVE%%HOMEPATH%
+REM @if not exist "%HOME%" @set HOME=%USERPROFILE%
 
-@set APP_PATH=%HOME%\.spf13-vim
+@if not exist "%HOME%" @set HOME=C:\src\vim
+
+@set APP_PATH=%HOME%\spf13-vim
 IF NOT EXIST "%APP_PATH%" (
     call git clone -b main https://github.com/davidyew/spf13-vim.git "%APP_PATH%"
 ) ELSE (
