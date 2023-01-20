@@ -14,12 +14,11 @@ REM    See the License for the specific language governing permissions and
 REM    limitations under the License.
 
 
-REM @if not exist "%HOME%" @set HOME=%HOMEDRIVE%%HOMEPATH%
-REM @if not exist "%HOME%" @set HOME=%USERPROFILE%
+@if not exist "%HOME%" @set HOME=%HOMEDRIVE%%HOMEPATH%
+@if not exist "%HOME%" @set HOME=%USERPROFILE%
 
-@if not exist "%HOME%" @set HOME=C:\src\vim
+@if not exist "%APP_PATH%" @set APP_PATH=C:\src\vim
 
-@set APP_PATH=%HOME%\spf13-vim
 IF NOT EXIST "%APP_PATH%" (
     call git clone -b main https://github.com/davidyew/spf13-vim.git "%APP_PATH%"
 ) ELSE (
@@ -36,7 +35,7 @@ copy /y "%APP_PATH%\_vimrc" "%HOME%\_vimrc"
 
 REM create directory junction to .vim
 REM See https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/mklink
-call mklink /J "%HOME%\.vim" "%APP_PATH%\.vim"
+call mklink /J "%HOME%\.vim" "%APP_PATH%\spf13-vim\vim"
 
 IF NOT EXIST "%APP_PATH%\.vim\bundle" (
     call mkdir "%APP_PATH%\.vim\bundle"
