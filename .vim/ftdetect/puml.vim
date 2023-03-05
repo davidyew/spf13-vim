@@ -1,8 +1,8 @@
 vim9script
 #augroup puml
 #    autocmd!
-    au BufNewFile,BufRead *.puml,*.iuml) set filetype=puml
-    autocmd BufWritePre *.puml,*.iuml call g:StripTrailingWhitespace()
+    au BufNewFile,BufRead *.{puml,iuml} set filetype=puml
+    autocmd BufWritePre *.{puml,iuml} call g:StripTrailingWhitespace()
     # au BufWritePost *.puml silent! :term ++hidden ++norestore c:/Apps/plantuml.bat %:p
 
     # Pre-requisite
