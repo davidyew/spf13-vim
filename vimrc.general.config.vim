@@ -18,7 +18,8 @@ vim9script
     # if !has('gui')
         # set term=$TERM          # Make arrow and other keys work
     # endif
-    filetype plugin indent on   # Automatically detect file types.
+    filetype plugin on          # Automatically load plugins
+    filetype plugin indent on   # Automatically detect indent files for file types.
     syntax on                   # Syntax highlighting
     set mouse=a                 # Automatically enable mouse usage
     set mousehide               # Hide the mouse cursor while typing

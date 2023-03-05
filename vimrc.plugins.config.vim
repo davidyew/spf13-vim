@@ -171,6 +171,9 @@ import "./operating_systems.function.vim" as OS
             elseif executable('rg')
                 g:ctrlp_fallback = 'rg %s --files --color=never --glob ""'
                 g:ctrlp_use_caching = 0
+                if empty($RIPGREP_CONFIG_PATH)
+                    throw 'Missing environment variable:RIPGREP_CONFIG_PATH for ripgrep configuration'
+                endif
             elseif executable('ag')
                 g:ctrlp_fallback = 'ag %s --nocolor -l -g ""'
             elseif executable('ack-grep')

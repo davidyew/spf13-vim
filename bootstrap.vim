@@ -119,5 +119,3 @@ import expand(g:config_path .. '/operating_systems.function.vim') as OS
         LoadVimScript(g:config_path .. '/gvimrc.local.vim')
     endif
 # }
-
-filetype plugin indent on
