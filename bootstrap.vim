@@ -59,7 +59,7 @@ import expand(g:config_path .. '/operating_systems.function.vim') as OS
           elseif executable('pwsh.exe')
               set shell='pwsh.exe'
           endif
-          set runtimepath=$HOME/.vim,$HOME/.vim/after,$VIM/vimfiles,$VIM/vimfiles/after,$VIMRUNTIME,
+          set runtimepath=$HOME\.vim,HOME\.vim\after,$VIM\vimfiles,$VIM\vimfiles\after,$VIMRUNTIME
 
           # Be nice and check for multi_byte even if the config requires
           # multi_byte support most of the time
