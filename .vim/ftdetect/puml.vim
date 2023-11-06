@@ -28,7 +28,8 @@ vim9script
         # https://plantuml.com/elk
         # -Playout=elk
         #
-        g:run_plantuml_cmd = 'START /B java -DPLANTUML_SECURITY_PROFILE=UNSECURE -jar ' .. g:plantuml_jar_filepath .. ' -Playout=smetana %'
+        g:run_plantuml_cmd = 'START /B java -DPLANTUML_SECURITY_PROFILE=UNSECURE -jar ' .. g:plantuml_jar_filepath .. ' %'
+        # g:run_plantuml_cmd = 'START /B java -DPLANTUML_SECURITY_PROFILE=UNSECURE -jar ' .. g:plantuml_jar_filepath .. ' -Playout=smetana %'
         # Run silently C:\app\puml.bat on full path of current buffer that is a *.puml file
         # START /B run batch program in background
         # without creating a hidden buffer window

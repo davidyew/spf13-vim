@@ -511,18 +511,18 @@ import "./operating_systems.function.vim" as OS
     # more info help netrw
     # https://shapeshed.com/vim-netrw/
     # netrw {
-        g:netrw_banner = 0
-        g:netrw_liststyle = 3
+        g:netrw_banner       = 0
+        g:netrw_liststyle    = 3
         g:netrw_browse_split = 4
-        g:netrw_altv = 1
-        g:netrw_winsize = 20
-        g:NetrwIsOpen = 0
+        g:netrw_altv         = 1
+        g:netrw_winsize      = 20
+        g:NetrwIsOpen        = 0
         def g:ToggleNetrw()
             if g:NetrwIsOpen
                 var i = bufnr("$")
                 while (i >= 1)
                     if (getbufvar(i, "&filetype") == "netrw")
-                        silent exe "bwipeout " .. i 
+                        silent exe "bwipeout " .. i
                     endif
                     i -= 1
                 endwhile
@@ -532,10 +532,38 @@ import "./operating_systems.function.vim" as OS
                 silent Lexplore
             endif
         enddef
+        # Set Control-e to show/hide Netrw window
         noremap <silent> <C-e> :call g:ToggleNetrw()<CR>
     # }
 
     # skim {
         command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+    # }
+
+    # CoderCookE/vim-chatgpt {
+        if isdirectory(expand("~/.vim/bundle/CoderCookE/vim-chatgpt"))
+            g:openai_api_key        = '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'
+            g:chat_gpt_max_tokens   = 2000
+            g:chat_gpt_model        = 'gpt-3'
+            g:chat_gpt_session_mode = 1
+            g:chat_gpt_temperature  = 0.7
+            g:chat_gpt_lang         = 'English'
+        endif
+    # }
+
+    # airblade/vim-gitgutter {
+        if isdirectory(expand("~/.vim/bundle/airblade/vim-gitgutter"))
+
+            def g:GitStatus()
+              let [a,m,r] = GitGutterGetHunkSummary()
+              return printf('+%d ~%d -%d', a, m, r)
+            enddef
+
+            set foldtext=gitgutter#fold#foldtext()
+            set statusline+=%{GitStatus()}
+
+            nmap ]h <Plug>(GitGutterNextHunk)
+            nmap [h <Plug>(GitGutterPrevHunk)
+        endif
     # }
 # }

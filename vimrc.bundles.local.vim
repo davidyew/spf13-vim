@@ -19,5 +19,23 @@ Plug 'hsanson/vim-openapi'
 # CSV
 # Plug 'chrisbra/csv.vim'
 
-# TODO: Only include this if there is ctags.exe
-Plug 'tc50cal/vim-taglist'
+# include vim plugins if there is ctags.exe
+if executable('ctags')
+    Plug 'tc50cal/vim-taglist'
+endif
+
+# https://github.com/dhruvasagar/vim-table-mode
+Plug 'dhruvasagar/vim-table-mode'
+
+# ChatGPT
+# Plug 'CoderCookE/vim-chatgpt'
+# Plug '0xStabby/chatgpt-vim'
+
+# Cucumber
+Plug 'yaegassy/coc-cucumber'
+
+# Vim Git Gutter
+Plug 'airblade/vim-gitgutter'
+
+# Terraform
+Plug 'hashivim/vim-terraform'
