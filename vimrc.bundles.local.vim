@@ -39,3 +39,10 @@ Plug 'airblade/vim-gitgutter'
 
 # Terraform
 Plug 'hashivim/vim-terraform'
+
+# AI Coding Assistant
+# Github Copilot
+Plug 'github/copilot.vim'
+#Plug 'zbirenbaum/copilot.lua'
+#Plug 'nvim-lua/plenary.nvim'
+#Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }

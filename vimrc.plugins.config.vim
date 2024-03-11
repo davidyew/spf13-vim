@@ -566,4 +566,20 @@ import "./operating_systems.function.vim" as OS
             nmap [h <Plug>(GitGutterPrevHunk)
         endif
     # }
+
+    # github/copilot.vim {}
+        if isdirectory(expand("~/.vim/bundle/github/copilot.vim"))
+            g:copilot_proxy = 'http://proxy2.sq.com.sg:80'
+        endif
+
+
+        if isdirectory(expand("~/.vim/bundle/CopilotC-Nvim/CopilotChat.nvim"))
+lua << EOF
+require("CopilotChat").setup {
+  debug = true, -- Enable debugging
+  -- See Configuration section for rest
+}
+EOF
+        endif
+    # }
 # }
