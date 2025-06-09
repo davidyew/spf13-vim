@@ -72,6 +72,8 @@ import "./operating_systems.function.vim" as OS
         if gitroot != ''
             &tags = &tags .. ',' .. gitroot .. '/.git/tags'
         endif
+
+        var tlist_cucumber_settings = 'feature;f:Feature;s:Scenario'
     # }
 
     # AutoCloseTag {
@@ -476,8 +478,19 @@ import "./operating_systems.function.vim" as OS
 
     # Vimwiki {
         if isdirectory(expand("~/.vim/bundle/vimwiki"))
-          # g:vimwiki_list = [{'path': '~/vimwiki/', 'auto_tags': 1, 'path_html': '~/vimwiki_html'}]
-          # g:vimwiki_folding = 'syntax'
+
+          g:vimwiki_ext2syntax = {
+            '.md': 'markdown',
+           '.wiki': 'media'
+          }
+          g:vimwiki_list = [
+          {
+            'path': '~/vimwiki/',
+            'auto_tags': 1,
+            'path_html': '~/vimwiki_html',
+            'ext': '.md'
+          }]
+          #g:vimwiki_folding = 'syntax'
           g:tagbar_type_vimwiki = {
             'ctagstype': 'vimwiki',
             'kinds': ['h:header'],
@@ -487,6 +500,12 @@ import "./operating_systems.function.vim" as OS
             'ctagsbin': '~/.vim/lib/vwtags.py',
             'ctagsargs': 'default'
           }
+        endif
+    # }
+
+    # FastFold {
+        if isdirectory(expand("~/.vim/bundle/fastfold"))
+        g:fastfold_savehook = 0
         endif
     # }
 
@@ -569,7 +588,7 @@ import "./operating_systems.function.vim" as OS
 
     # github/copilot.vim {}
         if isdirectory(expand("~/.vim/bundle/github/copilot.vim"))
-            g:copilot_proxy = 'http://proxy2.sq.com.sg:80'
+            #g:copilot_proxy = 'http://proxy2.sq.com.sg:80'
         endif
 
 

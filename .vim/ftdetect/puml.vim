@@ -1,7 +1,7 @@
 vim9script
 #augroup puml
 #    autocmd!
-    au BufNewFile,BufRead *.{puml,iuml} set filetype=puml
+    au BufNewFile,BufRead *.{puml,iuml} set filetype=puml foldmethod=syntax shiftwidth=2 tabstop=2 expandtab autoindent
     autocmd BufWritePre *.{puml,iuml} call g:StripTrailingWhitespace()
     # au BufWritePost *.puml silent! :term ++hidden ++norestore c:/Apps/plantuml.bat %:p
 
@@ -28,7 +28,7 @@ vim9script
         # https://plantuml.com/elk
         # -Playout=elk
         #
-        g:run_plantuml_cmd = 'START /B java -DPLANTUML_SECURITY_PROFILE=UNSECURE -jar ' .. g:plantuml_jar_filepath .. ' %'
+        g:run_plantuml_cmd = 'START /B java -DPLANTUML_LIMIT_SIZE=8192 -Xmx1024m -DPLANTUML_SECURITY_PROFILE=UNSECURE -DRELATIVE_INCLUDE="relative/absolute" -jar ' .. g:plantuml_jar_filepath .. ' %'
         # g:run_plantuml_cmd = 'START /B java -DPLANTUML_SECURITY_PROFILE=UNSECURE -jar ' .. g:plantuml_jar_filepath .. ' -Playout=smetana %'
         # Run silently C:\app\puml.bat on full path of current buffer that is a *.puml file
         # START /B run batch program in background
