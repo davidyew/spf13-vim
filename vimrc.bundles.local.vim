@@ -1,6 +1,10 @@
 vim9script
 
-Plug 'davidyew/vimwiki'
+# https://liuchengxu.github.io/vista.vim
+Plug 'liuchengxu/vista.vim'
+# https://liuchengxu.github.io/vim-clap
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+Plug 'vimwiki/vimwiki'
 Plug 'Konfekt/FastFold'
 # 2021-12-05 Skim is not ready for Windows
 # Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
@@ -46,3 +50,8 @@ Plug 'github/copilot.vim'
 #Plug 'zbirenbaum/copilot.lua'
 #Plug 'nvim-lua/plenary.nvim'
 #Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+
+Plug 'solyarisoftware/prompter.vim'
+
+# Pinescript
+Plug 'jbmorgado/vim-pine-script'
